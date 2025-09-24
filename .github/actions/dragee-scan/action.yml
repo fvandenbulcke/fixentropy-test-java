@@ -15,17 +15,16 @@ runs:
   steps:
     - name: Run Dragee Scan
       shell: bash
-      env:
-        DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH: /tmp/asserters
       run: |
         if [${{ inputs.asserter }}]; then
+          env DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH=/tmp/asserters
           git clone "https://${{ env.GITHUB_TOKEN }}@github.com/${{ inputs.asserter }}.git" "${{ env.DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH }}"
         else
           echo "No asserter provided"
         fi
         pwd
-        echo "report --from=$(pwd)${{ inputs.from }}"
-        ./.github/actions/dragee-scan/dragee-cli report --from="$(pwd)/${{ inputs.from }}"
+        echo "report --from=${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
+        ./.github/actions/dragee-scan/dragee-cli report --from="$(pwd)${{ inputs.from }}"
 
     - name: Upload Dragee Report
       shell: bash

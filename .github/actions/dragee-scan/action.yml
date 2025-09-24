@@ -17,6 +17,16 @@ runs:
     - name: Set up Bun
       uses: oven-sh/setup-bun@v2
 
+    - name: clone dragee-cli
+      shell: bash
+      run: |
+        git clone git@github.com:dragee-io/dragee-cli.git
+        cd dragee-cli
+        bun install
+        bun run build:linux
+        cd ..
+        chmod +x ./dragee-cli/dist/dragee-linux
+
     - name: Run Dragee Scan
       shell: bash
       run: |
@@ -27,8 +37,8 @@ runs:
           echo "No asserter provided"
         fi
         pwd
-        echo "report --from=${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
-        ./.github/actions/dragee-scan/dragee-cli report --from="$(pwd)${{ inputs.from }}"
+        echo "report --from=$(pwd)${{ inputs.from }}"
+        ./dragee-cli/dist/dragee-linux report --from="$(pwd)${{ inputs.from }}"
 
     - name: Upload Dragee Report
       shell: bash

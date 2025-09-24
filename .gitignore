@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+*.iml
+/target/
+/.settings/
+.classpath
+.project
+/.mvn/
+/mvnw
+/mvnw.cmd
+
+# OS & tooling
+.DS_Store
+Thumbs.db

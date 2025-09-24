@@ -1,0 +1,32 @@
+name: "dragee-scan-action"
+description: "A Github action to scan code with Dragee.io"
+author: "dragee-io"
+
+inputs:
+  asserter:
+    description: "The asserter to use <org>/<asserter>"
+    required: false
+  from:
+    description: "The path to scan"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Dragee Scan
+      shell: bash
+      env:
+        DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH: /tmp/asserters
+      run: |
+        if [${{ inputs.asserter }}]; then
+          git clone "https://${{ env.GITHUB_TOKEN }}@github.com/${{ inputs.asserter }}.git" "${{ env.DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH }}"
+        else
+          echo "No asserter provided"
+        fi
+        echo "report --from=${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
+        ./.github/actions/dragee-scan/dragee-cli report --from="${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
+
+    - name: Upload Dragee Report
+      shell: bash
+      run: |
+        curl --fail -X POST -H "Content-Type: application/json" -d @./dragee-report.json "https://api.dragee.io/api/v1/reports/github/${{ env.DRAGEE_TOKEN }}"

@@ -24,8 +24,8 @@ runs:
           echo "No asserter provided"
         fi
         pwd
-        echo "report --from=${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
-        ./.github/actions/dragee-scan/dragee-cli report --from="${{ env.GITHUB_WORKSPACE }}${{ inputs.from }}"
+        echo "report --from=$(pwd)${{ inputs.from }}"
+        ./.github/actions/dragee-scan/dragee-cli report --from="$(pwd)/${{ inputs.from }}"
 
     - name: Upload Dragee Report
       shell: bash

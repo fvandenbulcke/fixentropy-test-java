@@ -19,8 +19,8 @@ runs:
 
     - name: clone dragee-cli
       shell: bash
-      run: |
-        git clone https://${{ env.GITHUB_TOKEN }}@github.com/:dragee-io/dragee-cli.git
+      run: |        
+        git clone https://${{ env.GITHUB_TOKEN }}@github.com/dragee-io/dragee-cli.git
         cd dragee-cli
         bun install
         bun run build:linux

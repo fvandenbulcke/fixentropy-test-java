@@ -9,6 +9,9 @@ inputs:
   from:
     description: "The path to scan"
     required: true
+  grapher:
+    description: "Enable grapher"
+    required: false
 
 runs:
   using: "composite"

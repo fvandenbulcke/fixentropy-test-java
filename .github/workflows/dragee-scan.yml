@@ -20,26 +20,6 @@ jobs:
           cache: 'maven'
           cache-dependency-path: '**/pom.xml'
 
-      - name: Install Maven (Ubuntu)
-        shell: bash
-        run: |
-          if command -v mvn >/dev/null 2>&1; then
-            echo "Maven already installed"
-          else
-            if command -v apt-get >/dev/null 2>&1; then
-              if command -v sudo >/dev/null 2>&1; then
-                sudo apt-get update
-                sudo apt-get install -y maven
-              else
-                apt-get update
-                apt-get install -y maven
-              fi
-            else
-              echo "apt-get not found on this runner. Please install Maven for this OS."
-              exit 1
-            fi
-          fi
-
       - name: Build with Maven
         run: mvn clean install
 
@@ -48,6 +28,7 @@ jobs:
         uses: "./.github/actions/dragee-scan"
         with:
           from: '/target/dragee/'
+          grapher: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DRAGEE_TOKEN: ${{ secrets.DRAGEE_TOKEN }}

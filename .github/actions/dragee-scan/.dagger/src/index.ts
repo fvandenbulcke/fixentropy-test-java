@@ -54,7 +54,7 @@ export class DrageeCi {
         if (githubToken) ctr = ctr.withSecretVariable("GITHUB_TOKEN", githubToken);
 
         ctr = ctr
-            .withExec(["bash", "-lc", "git clone https://$GITHUB_TOKEN@github.com/dragee-io/dragee-cli.git dragee-cli"])
+            .withExec(["bash", "-lc", "git clone -b fix/config-dir https://$GITHUB_TOKEN@github.com/dragee-io/dragee-cli.git dragee-cli"])
             .withWorkdir("/work/dragee-cli")
             .withMountedCache("/root/.bun", bunCache)
             .withExec(["bun", "install"])

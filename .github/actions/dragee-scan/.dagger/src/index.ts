@@ -133,7 +133,7 @@ export class DrageeCi {
 
         ctr = ctr.withExec(args);
 
-        return ctr.file(path.posix.resolve("/", "dragee", "reports", "result.json"));
+        return ctr.file(path.posix.resolve("/", "work", "dragee", "reports", "result.json"));
     }
 
     /**

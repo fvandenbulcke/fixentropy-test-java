@@ -19,13 +19,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Dagger call run-scan
       uses: dagger/dagger-for-github@v8.2.0
       with:
-        module: .
+        module: ${{ github.action_path }}
         call: >-
           run-scan
           --from .

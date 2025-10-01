@@ -24,7 +24,7 @@ runs:
       with:
         module: ${{ github.action_path }}
         call: >-
-          run-scan
+          run-pipeline
           --from .
           --asserter "${{ inputs.asserter }}"
           --grapher

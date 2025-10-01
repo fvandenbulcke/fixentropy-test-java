@@ -113,7 +113,7 @@ export class DrageeCi {
         const aptCache: CacheVolume = dag.cacheVolume("apt-cache");
 
         let ctr = dag.container()
-            .from("debian:stable-slim")
+            .from("oven/bun:1")
             .withMountedCache("/var/cache/apt", aptCache)
             .withExec(["bash", "-lc", "apt-get update && apt-get install -y ca-certificates curl"])
             .withWorkdir("/work");
@@ -130,10 +130,6 @@ export class DrageeCi {
 
         const scanRoot = path.posix.resolve("/", from);
         const args = this.buildCommandArgs(scanRoot);
-
-        console.log("ctr", ctr.directory("."))
-        console.log("args", args)
-        console.log("scanRoot", scanRoot)
 
         ctr = ctr.withExec(args);
 

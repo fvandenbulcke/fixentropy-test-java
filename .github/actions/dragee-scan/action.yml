@@ -30,6 +30,7 @@ runs:
           --grapher
           --github-token env:GITHUB_TOKEN
           --dragee-token env:DRAGEE_TOKEN
+          --source ${{ github.workspace }}
         version: latest
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}

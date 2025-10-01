@@ -9,41 +9,22 @@ inputs:
   from:
     description: "The path to scan"
     required: true
-  grapher:
-    description: "Enable grapher"
-    required: false
 
 runs:
   using: "composite"
   steps:
-
-    - name: Set up Bun
-      uses: oven-sh/setup-bun@v2
-
-    - name: clone dragee-cli
-      shell: bash
-      run: |        
-        git clone https://${{ env.GITHUB_TOKEN }}@github.com/dragee-io/dragee-cli.git
-        cd dragee-cli
-        bun install
-        bun run build:linux
-        cd ..
-        chmod +x ./dragee-cli/dist/dragee-linux
-
-    - name: Run Dragee Scan
-      shell: bash
-      run: |
-        if [${{ inputs.asserter }}]; then
-          env DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH=/tmp/asserters
-          git clone "https://${{ env.GITHUB_TOKEN }}@github.com/${{ inputs.asserter }}.git" "${{ env.DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH }}"
-        else
-          echo "No asserter provided"
-        fi
-        pwd
-        echo "report --from=$(pwd)${{ inputs.from }}"
-        ./dragee-cli/dist/dragee-linux report --from="$(pwd)${{ inputs.from }}"
-
-    - name: Upload Dragee Report
-      shell: bash
-      run: |
-        curl --fail -X POST -H "Content-Type: application/json" -d @./dragee-report.json "https://api.dragee.io/api/v1/reports/github/${{ env.DRAGEE_TOKEN }}"
+    - name: Dagger call run-scan
+      uses: dagger/dagger-for-github@v8.2.0
+      with:
+        module: .
+        call: >-
+          run-scan
+          --from .
+          --asserter "${{ inputs.asserter }}"
+          --grapher
+          --github-token env:GITHUB_TOKEN
+          --dragee-token env:DRAGEE_TOKEN
+        version: latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DRAGEE_TOKEN: ${{ secrets.DRAGEE_TOKEN }}

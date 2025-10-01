@@ -133,7 +133,7 @@ export class DrageeCi {
 
         ctr = ctr.withExec(args);
 
-        return ctr.file("/work/dragee-cli/dragee-report.json");
+        return ctr.file("/src/dragee/reports/result.json");
     }
 
     /**

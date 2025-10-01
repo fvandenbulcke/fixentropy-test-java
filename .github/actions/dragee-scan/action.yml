@@ -9,6 +9,12 @@ inputs:
   from:
     description: "The path to scan"
     required: true
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
+  dragee-token:
+    description: "Dragee token for authentication"
+    required: true
 
 runs:
   using: "composite"
@@ -26,5 +32,5 @@ runs:
           --dragee-token env:DRAGEE_TOKEN
         version: latest
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRAGEE_TOKEN: ${{ secrets.DRAGEE_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        DRAGEE_TOKEN: ${{ inputs.dragee-token }}

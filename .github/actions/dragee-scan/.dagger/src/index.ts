@@ -30,9 +30,6 @@ export class DrageeCi {
      */
     private buildCommandArgs(from: string, grapher?: boolean): string[] {
         const args = ["/cli/dist/dragee-linux", "report", "--from", path.posix.join("/src", from)];
-        if (grapher) {
-            args.push("--grapher");
-        }
         return args;
     }
 

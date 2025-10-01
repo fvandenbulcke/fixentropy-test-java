@@ -107,7 +107,6 @@ export class DrageeCi {
         from: string,
         cli: Directory,
         asserterDir?: Directory,
-        grapher?: boolean,
         source?: Directory,
     ): Promise<File> {
         const src = source ?? dag.currentModule().source().directory(".");
@@ -130,7 +129,11 @@ export class DrageeCi {
         }
 
         const scanRoot = path.posix.resolve("/", from);
-        const args = this.buildCommandArgs(scanRoot, grapher);
+        const args = this.buildCommandArgs(scanRoot);
+
+        console.log("ctr", ctr.directory("."))
+        console.log("args", args)
+        console.log("scanRoot", scanRoot)
 
         ctr = ctr.withExec(args);
 
@@ -204,7 +207,6 @@ export class DrageeCi {
             scanRoot,
             cliDir,
             asserterDir,
-            !!grapher,
             source ?? dag.currentModule().source().directory("."),
         );
 

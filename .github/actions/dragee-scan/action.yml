@@ -25,7 +25,7 @@ runs:
         module: ${{ github.action_path }}
         call: >-
           run-pipeline
-          --from .
+          --from "${{ inputs.from }}"
           --asserter "${{ inputs.asserter }}"
           --grapher
           --github-token env:GITHUB_TOKEN

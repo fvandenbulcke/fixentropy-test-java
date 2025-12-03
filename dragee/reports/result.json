@@ -1,0 +1,44 @@
+[
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/services-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.service.OrderService",
+        "error": "This service must not have any dependency of type \"ddd/event\""
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/services-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.service.OrderService",
+        "error": "This service must not have any dependency of type \"ddd/factory\""
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/aggregates-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.aggregate.Order",
+        "error": "This aggregate must not have any dependency of type \"ddd/aggregate\""
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/aggregates-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.aggregate.Order",
+        "error": "This aggregate must not have any dependency of type \"ddd/command\""
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/factories-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.factory.OrderFactory",
+        "error": "This factory must not have any dependency of type \"ddd/command\""
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/aggregates-mandatory-dependencies",
+        "drageeName": "com.hoppr.app.ddd.aggregate.Order",
+        "error": "This aggregate must at least contain a \"ddd/entity\" type dragee"
+    },
+    {
+        "namespace": "ddd",
+        "ruleId": "ddd/commands-allowed-dependencies",
+        "drageeName": "com.hoppr.app.ddd.command.CreateOrder",
+        "error": "This command must not have any dependency of type \"ddd/value_object\""
+    }
+]

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+    <html>
+        <body>
+            
+        <div>
+    <h1>ddd</h1>
+    <pre class="mermaid">
+        pie showData
+            title ddd - Rules
+            "Success": 6
+            "Errors": 7
+    </pre>
+    <ul><li>com.hoppr.app.ddd.service.OrderService: (ddd/services-allowed-dependencies) This service must not have any dependency of type "ddd/event"</li><li>com.hoppr.app.ddd.service.OrderService: (ddd/services-allowed-dependencies) This service must not have any dependency of type "ddd/factory"</li><li>com.hoppr.app.ddd.aggregate.Order: (ddd/aggregates-allowed-dependencies) This aggregate must not have any dependency of type "ddd/aggregate"</li><li>com.hoppr.app.ddd.aggregate.Order: (ddd/aggregates-allowed-dependencies) This aggregate must not have any dependency of type "ddd/command"</li><li>com.hoppr.app.ddd.factory.OrderFactory: (ddd/factories-allowed-dependencies) This factory must not have any dependency of type "ddd/command"</li><li>com.hoppr.app.ddd.aggregate.Order: (ddd/aggregates-mandatory-dependencies) This aggregate must at least contain a "ddd/entity" type dragee</li><li>com.hoppr.app.ddd.command.CreateOrder: (ddd/commands-allowed-dependencies) This command must not have any dependency of type "ddd/value_object"</li></ul>
+    </div>
+    
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        </script>
+        </body>
+    </html>

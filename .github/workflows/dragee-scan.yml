@@ -48,5 +48,4 @@ jobs:
         uses: "./.github/actions/dragee-scan"
         with:
           from: '/target/dragee/'
-          dragee-token: ${{ secrets.DRAGEE_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

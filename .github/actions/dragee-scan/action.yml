@@ -13,6 +13,10 @@ inputs:
     description: "GitHub token for authentication"
     required: true
 
+permissions:
+  id-token: write
+  contents: read
+
 runs:
   using: "composite"
   steps:
@@ -35,7 +39,7 @@ runs:
           --grapher
           --github-token env:GITHUB_TOKEN
           --oidc-token env:OIDC_TOKEN
-          --backend-url https://unmentholated-misti-prevalid.ngrok-free.dev
+          --backend-url https://api.dragee.io
           --source ${{ github.workspace }}
         version: latest
       env:

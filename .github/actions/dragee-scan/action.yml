@@ -39,7 +39,7 @@ runs:
           --grapher
           --github-token env:GITHUB_TOKEN
           --oidc-token env:OIDC_TOKEN
-          --backend-url https://api.dragee.io
+          --backend-url https://unmentholated-misti-prevalid.ngrok-free.dev
           --source ${{ github.workspace }}
         version: latest
       env:

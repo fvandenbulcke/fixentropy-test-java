@@ -46,7 +46,7 @@ export class DrageeCi {
         const aptCache: CacheVolume = dag.cacheVolume("apt-cache");
 
         let ctr: Container = dag.container()
-            .from("oven/bun:1")
+            .from("oven/bun:1.3.3")
             .withMountedCache("/var/cache/apt", aptCache)
             .withExec(["bash", "-lc", "apt-get update && apt-get install -y git ca-certificates"])
             .withWorkdir("/work");
@@ -116,7 +116,7 @@ export class DrageeCi {
         const aptCache: CacheVolume = dag.cacheVolume("apt-cache");
 
         let ctr = dag.container()
-            .from("oven/bun:1")
+            .from("oven/bun:1.3.3")
             .withMountedCache("/var/cache/apt", aptCache)
             .withExec(["bash", "-lc", "apt-get update && apt-get install -y ca-certificates curl"])
             .withWorkdir("/work");

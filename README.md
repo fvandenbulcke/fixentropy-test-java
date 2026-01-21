@@ -1,5 +1,6 @@
 # Java 17 + Maven + Dragee annotations
 
+
 Ce projet est un squelette Maven configuré pour:
 - Java 17
 - compileOnly: io.dragee:ddd-annotations

@@ -9,6 +9,9 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  DRAGEE_BACKEND_URL: "https://app.fixentropy.io/api"
+
 jobs:
   hello:
     runs-on: ubuntu-latest

@@ -181,7 +181,6 @@ export class DrageeCi {
 
         const scanRoot = path.posix.resolve("/", validatedFrom);
 
-        console.log('OIDC Token', await oidcToken.plaintext());
         const reportFile: File = await this.runReport(
             scanRoot,
             cliDir,

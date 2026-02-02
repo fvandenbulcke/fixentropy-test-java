@@ -53,3 +53,4 @@ jobs:
         with:
           from: '/target/dragee/'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          backend-url: ${{ env.DRAGEE_BACKEND_URL }}

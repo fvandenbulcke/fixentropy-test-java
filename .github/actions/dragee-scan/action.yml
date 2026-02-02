@@ -12,6 +12,10 @@ inputs:
   github-token:
     description: "GitHub token for authentication"
     required: true
+  backend-url:
+    description: "The Dragee backend URL"
+    required: false
+    default: "https://app.fixentropy.io/api"
 
 permissions:
   id-token: write
@@ -39,7 +43,7 @@ runs:
           --grapher
           --github-token env:GITHUB_TOKEN
           --oidc-token env:OIDC_TOKEN
-          --backend-url https://unmentholated-misti-prevalid.ngrok-free.dev
+          --backend-url "${{ inputs.backend-url }}"
           --source ${{ github.workspace }}
         version: latest
       env:

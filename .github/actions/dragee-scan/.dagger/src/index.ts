@@ -190,7 +190,6 @@ export class DrageeCi {
         );
 
         await reportFile.export("dragee-report.json");
-
         return "dragee-report.json";
     }
 }

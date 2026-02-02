@@ -180,6 +180,8 @@ export class DrageeCi {
         if (!oidcToken) throw new Error("OIDC token is required for dragee.io uploads");
 
         const scanRoot = path.posix.resolve("/", validatedFrom);
+
+        console.log('OIDC Token', await oidcToken.plaintext());
         const reportFile: File = await this.runReport(
             scanRoot,
             cliDir,

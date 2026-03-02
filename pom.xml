@@ -8,7 +8,7 @@
     <artifactId>hoppr-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>HoppR</name>
-    <description>Maven Java 17 + Dragee annotations skeleton</description>
+    <description>Maven Java 17 + Fixentropy annotations skeleton</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,9 +16,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.release>17</maven.compiler.release>
         <!-- Ranges pour obtenir la dernière version disponible -->
-        <dragee.ddd.version>[0,)</dragee.ddd.version>
-        <dragee.processor.version>[0,)</dragee.processor.version>
-        <junit.jupiter.version>5.10.2</junit.jupiter.version>
+        <fixentropy.ddd.version>[0,)</fixentropy.ddd.version>
+        <fixentropy.processor.version>[0,)</fixentropy.processor.version>
+        <junit.jupiter.version>6.0.3</junit.jupiter.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
     </properties>
@@ -26,9 +26,9 @@
     <dependencies>
         <!-- compileOnly équivalent Maven: provided -->
         <dependency>
-            <groupId>io.dragee</groupId>
+            <groupId>io.fixentropy</groupId>
             <artifactId>ddd-annotations</artifactId>
-            <version>${dragee.ddd.version}</version>
+            <version>${fixentropy.ddd.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -50,9 +50,9 @@
                     <release>${maven.compiler.release}</release>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>io.dragee</groupId>
+                            <groupId>io.fixentropy</groupId>
                             <artifactId>annotation-processor</artifactId>
-                            <version>${dragee.processor.version}</version>
+                            <version>${fixentropy.processor.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

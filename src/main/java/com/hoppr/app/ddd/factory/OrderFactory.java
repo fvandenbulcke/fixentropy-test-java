@@ -1,8 +1,8 @@
 package com.hoppr.app.ddd.factory;
 
-import io.dragee.annotation.ddd.DDD;
 import com.hoppr.app.ddd.aggregate.Order;
 import com.hoppr.app.ddd.command.CreateOrder;
+import io.fixentropy.annotation.ddd.DDD;
 
 import java.util.UUID;
 

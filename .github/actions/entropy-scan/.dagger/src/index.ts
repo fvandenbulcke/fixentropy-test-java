@@ -4,7 +4,7 @@ import {
 import * as path from "path";
 
 @object()
-export class DrageeCi {
+export class FixentropyCi {
 
     /**
      * Validates and normalizes input parameters using Node.js utilities
@@ -29,14 +29,14 @@ export class DrageeCi {
      * @returns Array of command arguments
      */
     private buildCommandArgs(from: string, grapher?: boolean): string[] {
-        const args = ["/cli/dist/dragee-linux", "report", "--from", path.posix.join("/src", from)];
+        const args = ["/cli/dist/fixentropy-linux", "report", "--from", path.posix.join("/src", from)];
         return args;
     }
 
     /**
-     * Builds the dragee CLI from the official repository
+     * Builds the fixentropy CLI from the official repository
      * @param githubToken Optional GitHub token for private repository access
-     * @returns Directory containing the built CLI with executable at /dist/dragee-linux
+     * @returns Directory containing the built CLI with executable at /dist/fixentropy-linux
      */
     @func()
     async buildCli(
@@ -54,14 +54,14 @@ export class DrageeCi {
         if (githubToken) ctr = ctr.withSecretVariable("GITHUB_TOKEN", githubToken);
 
         ctr = ctr
-            .withExec(["bash", "-lc", "git clone -b feat/push-report https://$GITHUB_TOKEN@github.com/dragee-io/dragee-cli.git dragee-cli"])
-            .withWorkdir("/work/dragee-cli")
+            .withExec(["bash", "-lc", "git clone -b feat/push-report https://$GITHUB_TOKEN@github.com/fixentropy-io/fixentropy-cli.git fixentropy-cli"])
+            .withWorkdir("/work/fixentropy-cli")
             .withMountedCache("/root/.bun", bunCache)
             .withExec(["bun", "install"])
             .withExec(["bun", "run", "build:linux"])
-            .withExec(["chmod", "+x", "./dist/dragee-linux"]);
+            .withExec(["chmod", "+x", "./dist/fixentropy-linux"]);
 
-        return ctr.directory("/work/dragee-cli");
+        return ctr.directory("/work/fixentropy-cli");
     }
 
     /**
@@ -94,14 +94,14 @@ export class DrageeCi {
     }
 
     /**
-     * Runs dragee analysis and generates a report
+     * Runs entropy analysis and generates a report
      * @param from Path to scan relative to source directory
-     * @param cli Directory containing the built dragee CLI
-     * @param oidcToken Required OIDC token for dragee.io uploads
-     * @param backendUrl Optional dragee.io backend URL
+     * @param cli Directory containing the built fixentropy CLI
+     * @param oidcToken Required OIDC token for fixentropy.io uploads
+     * @param backendUrl Optional fixentropy.io backend URL
      * @param asserterDir Optional directory containing custom asserters
      * @param source Optional source directory to scan (defaults to the current module source)
-     * @returns File containing the generated dragee report JSON
+     * @returns File containing the generated fixentropy report JSON
      */
     @func()
     async runReport(
@@ -128,7 +128,7 @@ export class DrageeCi {
         if (asserterDir) {
             ctr = ctr
                 .withMountedDirectory("/tmp/asserters", asserterDir)
-                .withEnvVariable("DRAGEE_ASSERTER_LOCAL_REGISTRY_PATH", "/tmp/asserters");
+                .withEnvVariable("FIXENTROPY_ASSERTER_LOCAL_REGISTRY_PATH", "/tmp/asserters");
         }
 
         if (oidcToken) {
@@ -144,17 +144,17 @@ export class DrageeCi {
 
         ctr = ctr.withExec(args);
 
-        return ctr.file(path.posix.resolve("/", "work", "dragee", "reports", "result.json"));
+        return ctr.file(path.posix.resolve("/", "work", "fixentropy", "reports", "result.json"));
     }
 
     /**
-     * Complete dragee pipeline that builds CLI, optionally fetches asserters, runs analysis, and uploads results
+     * Complete fixentropy pipeline that builds CLI, optionally fetches asserters, runs analysis, and uploads results
      * @param from Path to scan relative to source directory
      * @param asserter Optional custom asserter repository in format "org/repo"
      * @param grapher Optional flag to enable grapher mode in the analysis
      * @param githubToken Optional GitHub token for private repository access
-     * @param oidcToken Required OIDC token for dragee.io uploads
-     * @param backendUrl Optional dragee.io backend URL
+     * @param oidcToken Required OIDC token for fixentropy.io uploads
+     * @param backendUrl Optional fixentropy.io backend URL
      * @param source Optional source directory to scan (defaults to the current module source)
      * @returns Status message indicating completion or local file path
      */
@@ -177,7 +177,7 @@ export class DrageeCi {
             asserterDir = await this.fetchAsserter(validatedAsserter, githubToken);
         }
 
-        if (!oidcToken) throw new Error("OIDC token is required for dragee.io uploads");
+        if (!oidcToken) throw new Error("OIDC token is required for fixentropy.io uploads");
 
         const scanRoot = path.posix.resolve("/", validatedFrom);
 
@@ -190,7 +190,7 @@ export class DrageeCi {
             source ?? dag.currentModule().source().directory("."),
         );
 
-        await reportFile.export("dragee-report.json");
-        return "dragee-report.json";
+        await reportFile.export("fixentropy-report.json");
+        return "fixentropy-report.json";
     }
 }

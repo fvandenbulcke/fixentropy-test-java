@@ -1,5 +1,5 @@
 {
-  "name": "dragee-ci",
+  "name": "fixentropy-ci",
   "engineVersion": "v0.18.12",
   "sdk": {
     "source": "typescript"

@@ -1,6 +1,6 @@
-name: "dragee-scan-action"
-description: "A Github action to scan code with Dragee.io"
-author: "dragee-io"
+name: "fixentropy-scan-action"
+description: "A Github action to scan code with fixentropy.io"
+author: "fixentropy-io"
 
 inputs:
   asserter:
@@ -13,7 +13,7 @@ inputs:
     description: "GitHub token for authentication"
     required: true
   backend-url:
-    description: "The Dragee backend URL"
+    description: "The fixentropy backend URL"
     required: false
     default: "https://app.fixentropy.io/api"
 
@@ -29,7 +29,7 @@ runs:
       uses: actions/github-script@v7
       with:
         script: |
-          const token = await core.getIDToken("dragee");
+          const token = await core.getIDToken("fixentropy");
           core.setOutput("token", token);
 
     - name: Dagger call run-scan

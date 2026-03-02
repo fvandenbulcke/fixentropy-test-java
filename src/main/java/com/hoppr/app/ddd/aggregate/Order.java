@@ -1,6 +1,6 @@
 package com.hoppr.app.ddd.aggregate;
 
-import io.dragee.annotation.ddd.DDD;
+import io.fixentropy.annotation.ddd.DDD;
 import com.hoppr.app.ddd.value.Money;
 import com.hoppr.app.ddd.command.CreateOrder;
 import java.util.UUID;

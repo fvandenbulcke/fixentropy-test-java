@@ -1,6 +1,6 @@
 package com.hoppr.app.ddd.repository;
 
-import io.dragee.annotation.ddd.DDD;
+import io.fixentropy.annotation.ddd.DDD;
 import com.hoppr.app.ddd.aggregate.Order;
 import java.util.Optional;
 import java.util.UUID;

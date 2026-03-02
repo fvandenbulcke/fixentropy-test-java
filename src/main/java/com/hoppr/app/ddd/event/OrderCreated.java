@@ -1,7 +1,8 @@
 package com.hoppr.app.ddd.event;
 
-import io.dragee.annotation.ddd.DDD;
 import com.hoppr.app.ddd.value.Money;
+import io.fixentropy.annotation.ddd.DDD;
+
 import java.util.UUID;
 
 @DDD.Event

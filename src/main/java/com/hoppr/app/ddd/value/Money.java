@@ -1,6 +1,6 @@
 package com.hoppr.app.ddd.value;
 
-import io.dragee.annotation.ddd.DDD;
+import io.fixentropy.annotation.ddd.DDD;
 import java.math.BigDecimal;
 import java.util.Objects;
 

@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 env:
-  DRAGEE_BACKEND_URL: "https://app.fixentropy.io/api"
+  FIXENTROPY_BACKEND_URL: "https://app.fixentropy.io/api"
 
 jobs:
   hello:
@@ -50,10 +50,10 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - name: Dragee Scan
-#        uses: dragee-io/dragee-scan-action@v1
-        uses: "./.github/actions/dragee-scan"
+      - name: Fixentropy Scan
+#        uses: fixentropy-io/entropy-scan-action@v1
+        uses: "./.github/actions/entropy-scan"
         with:
-          from: '/target/dragee/'
+          from: '/target/fixentropy/'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          backend-url: ${{ env.DRAGEE_BACKEND_URL }}
+          backend-url: ${{ env.FIXENTROPY_BACKEND_URL }}

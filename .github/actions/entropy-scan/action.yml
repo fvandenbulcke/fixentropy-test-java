@@ -2,6 +2,10 @@ name: "fixentropy-scan-action"
 description: "A Github action to scan code with fixentropy.io"
 author: "fixentropy-io"
 
+branding:
+  icon: 'activity'
+  color: 'purple'
+
 inputs:
   asserter:
     description: "The asserter to use <org>/<asserter>"
@@ -13,13 +17,10 @@ inputs:
     description: "GitHub token for authentication"
     required: true
   backend-url:
-    description: "The fixentropy backend URL"
+    description: "The Fixentropy backend URL"
     required: false
     default: "https://app.fixentropy.io/api"
 
-permissions:
-  id-token: write
-  contents: read
 
 runs:
   using: "composite"
@@ -33,19 +34,6 @@ runs:
           core.setOutput("token", token);
 
     - name: Dagger call run-scan
-      uses: dagger/dagger-for-github@v8.2.0
-      with:
-        module: ${{ github.action_path }}
-        call: >-
-          run-pipeline
-          --from "${{ inputs.from }}"
-          --asserter "${{ inputs.asserter }}"
-          --grapher
-          --github-token env:GITHUB_TOKEN
-          --oidc-token env:OIDC_TOKEN
-          --backend-url "${{ inputs.backend-url }}"
-          --source ${{ github.workspace }}
-        version: latest
-      env:
-        GITHUB_TOKEN: ${{ inputs.github-token }}
-        OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+      shell: bash
+      run: |
+        echo "GitHub Token: ${{ inputs.github-token }}"

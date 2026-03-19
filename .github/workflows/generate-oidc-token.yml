@@ -1,0 +1,32 @@
+name: run token
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate OIDC Token
+        id: oidc
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken("fixentropy");
+            core.setOutput("token", token);
+            
+      - name: Display Token for Testing
+        shell: bash
+        run: |
+          TOKEN="${{ steps.oidc.outputs.token }}"
+          echo "========================================"
+          echo "OIDC Token (copier pour Postman):"
+          echo "$TOKEN" | base64
+          echo "========================================"
+          echo ""
+          echo "Token Claims (payload décodé):"
+          echo "$TOKEN" | cut -d'.' -f2 | base64 -d 2>/dev/null | jq . || echo "$TOKEN" | cut -d'.' -f2 | base64 -d 2>/dev/null
